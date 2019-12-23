@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="PhoneDealer.View.PaginaListaTelefones"
+             xmlns:b="clr-namespace:Behaviors;assembly=Behaviors"
+             xmlns:conversores="clr-namespace:PhoneDealer.Converter"
+             Title="Histórico"
+             x:Name="PaginaHistorico">
+    <ContentPage.Resources>
+        <conversores:SelectedItemEventArgsToSelectedItemConverter x:Key="ConversorItemSelecionado"/>
+    </ContentPage.Resources>
+    <ContentPage.Behaviors>
+        <b:EventHandlerBehavior EventName="Appearing">
+            <b:InvokeCommandAction Command="{Binding OnAppearingCommand}"/>
+        </b:EventHandlerBehavior>
+    </ContentPage.Behaviors>
+    <ContentPage.Content>
+        <Grid>
+            <ListView ItemsSource="{Binding ListaTelefone}"
+                      HasUnevenRows="True"
+                      CachingStrategy="RecycleElement">
+                <ListView.Behaviors>
+                    <b:EventHandlerBehavior EventName="ItemTapped">
+                        <b:InvokeCommandAction Command="{Binding Path=BindingContext.DetalhesEmprestimoCommand, Source={x:Reference PaginaHistorico}}"
+                                                   Converter="{StaticResource ConversorItemSelecionado}" />
+
+                    </b:EventHandlerBehavior>
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Label HorizontalOptions="Start" 
+                                       Text="{Binding Modelo}"
+                                       Margin="10"/>
+                                <Label HorizontalOptions="End"
+                                       Margin="0,0,10,0">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Emprestado por: "/>
+                                            <Span Text="{Binding NomeEmprestador}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label Text="{Binding DataEmprestada, StringFormat='{}{0:dd/MM/yyyy}'}"
+                                       HorizontalOptions="Start"
+                                       Grid.Row="1"
+                                       Margin="10,0,0,0">
+                                    
+                                </Label>
+                                <Label Text="Devolvido" Grid.Row="1" HorizontalOptions="End"
+                                       Margin="0,0,10,0">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding DevolvidoString}"></Span>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Text="+" 
+                    FontSize="Large"
+                    Padding="0"
+                    CornerRadius="25" 
+                    Margin="20"
+                    Command="{Binding IrParaRegistroCommand}"
+                    BackgroundColor="LightBlue" 
+                    TextColor="White" 
+                    HorizontalOptions="EndAndExpand"
+                    VerticalOptions="EndAndExpand"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

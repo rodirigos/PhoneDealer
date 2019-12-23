@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="PhoneDealer.View.PaginaAdicionarEmprestimo"
+             xmlns:b="clr-namespace:Behaviors;assembly=Behaviors">
+    <ContentPage.Behaviors>
+        <b:EventHandlerBehavior EventName="Appearing">
+            <b:InvokeCommandAction Command="{Binding OnAppearingCommand}"/>
+        </b:EventHandlerBehavior>
+    </ContentPage.Behaviors>
+    <ContentPage.Content>
+        <StackLayout Margin="10">
+            <Label Text="Aparelho Celular"/>
+            <Picker Visual="Material"
+                    ItemDisplayBinding="{Binding Modelo}"
+                    SelectedIndex="{Binding Indice}"
+                    ItemsSource="{Binding ListaTelefones}"/>
+            
+            <Entry Visual="Material"
+                   Placeholder="Emprestador"
+                   Text="{Binding NomeEmprestador}"/>
+
+            <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
+                <Button Visual="Material"
+                        HorizontalOptions="FillAndExpand"
+                    Text="Cancelar"
+                    Command="{Binding VoltarTelaDeEmprestimoCommand}">
+                </Button>
+                <Button Visual="Material"
+                        HorizontalOptions="FillAndExpand"
+                    Text="Adicionar"
+                    Command="{Binding AdicionarEmprestimoCommand}">
+                </Button>
+            </StackLayout>
+            
+
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
