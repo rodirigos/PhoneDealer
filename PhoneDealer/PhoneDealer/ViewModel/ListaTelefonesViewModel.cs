@@ -19,7 +19,11 @@ namespace PhoneDealer.ViewModel
             OnAppearingCommand = new Command(() => NoAparecimento());
             IrParaRegistroCommand = new Command(async() => await IrPaginaRegistro());
             DetalhesEmprestimoCommand = new Command<TelefoneEmprestimo>(async (telefone) => await IrParaDetalhesEmprestimo(telefone));
-            ListaTelefone = new ObservableCollection<TelefoneEmprestimo>();       
+            ListaTelefone = new ObservableCollection<TelefoneEmprestimo>();
+            MessagingCenter.Subscribe<string>(this, "Update", (sender) =>
+            {
+                NoAparecimento();
+            });
         }
 
         #region Propriedades

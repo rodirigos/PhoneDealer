@@ -51,13 +51,14 @@ namespace PhoneDealer.ViewModel
 
         public async Task AdicionarEmprestimo()
         {
+
             TelefoneEmprestimo telefoneEmprestimo = new TelefoneEmprestimo()
             {
                 Modelo = TelefoneSelecionado.Modelo,
                 DataEmprestada = DateTime.Now,
                 Devolvido = false,
                 NomeEmprestador = NomeEmprestador,
-                Id = new Guid()
+                Id = Guid.NewGuid()
             };
             ListaHistoricoTelefone.Add(telefoneEmprestimo);
             servicoArmazenamento.SalvarListaEmprestimo(ListaHistoricoTelefone);

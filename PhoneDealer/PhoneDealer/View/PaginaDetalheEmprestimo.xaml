@@ -4,12 +4,36 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="PhoneDealer.View.PaginaDetalheEmprestimo">
+             x:Class="PhoneDealer.View.PaginaDetalheEmprestimo"
+             xmlns:b="clr-namespace:Behaviors;assembly=Behaviors">
+    <ContentPage.Behaviors>
+        <b:EventHandlerBehavior EventName="Appearing">
+            <b:InvokeCommandAction Command="{Binding OnAppearingCommand}"/>
+        </b:EventHandlerBehavior>
+    </ContentPage.Behaviors>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Margin="10">
+            <Label Text="{Binding EmprestimoSelecionado.Modelo, StringFormat='Modelo: {0}'}"/>
+            <Label Text="{Binding EmprestimoSelecionado.NomeEmprestador, StringFormat='Ultimo emprestimo por: {0}'}"/>
+            <Label Text="{Binding EmprestimoSelecionado.DataEmprestada, StringFormat='Data Emprestada: {0}'}"/>
+            <Label IsVisible="{Binding EmprestimoSelecionado.Devolvido}" Text="{Binding EmprestimoSelecionado.DataDevolvida, StringFormat='Data Devolvida: {0}'}"/>
+            <Label Text="{Binding EmprestimoSelecionado.DevolvidoString}"/>
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Cancelar"
+                        Visual="Material"
+                        Command="{Binding CancelarCommand}"/>
+                <Button Text="Devolver Aparelho" 
+                        IsVisible="{Binding NaoDevolvido}" 
+                        Command="{Binding DevolverCommand}"
+                        Visual="Material"/>
+            </StackLayout>
+
+
+            <Button HorizontalOptions="EndAndExpand"
+                    Text="Remover registro"
+                    Visual="Material"
+                    Command="{Binding RemoverCommand}"/>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
