@@ -7,8 +7,12 @@
              x:Class="PhoneDealer.View.PaginaListaTelefones"
              xmlns:b="clr-namespace:Behaviors;assembly=Behaviors"
              xmlns:conversores="clr-namespace:PhoneDealer.Converter"
+             xmlns:control="clr-namespace:PhoneDealer.Control"
              Title="Histórico"
-             x:Name="PaginaHistorico">
+             x:Name="PaginaHistorico"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:behavior="clr-namespace:PhoneDealer.Behavior">
     <ContentPage.Resources>
         <conversores:SelectedItemEventArgsToSelectedItemConverter x:Key="ConversorItemSelecionado"/>
     </ContentPage.Resources>
@@ -19,52 +23,119 @@
     </ContentPage.Behaviors>
     <ContentPage.Content>
         <Grid>
-            <ListView ItemsSource="{Binding ListaTelefone}"
-                      HasUnevenRows="True"
-                      CachingStrategy="RecycleElement">
-                <ListView.Behaviors>
-                    <b:EventHandlerBehavior EventName="ItemTapped">
-                        <b:InvokeCommandAction Command="{Binding Path=BindingContext.DetalhesEmprestimoCommand, Source={x:Reference PaginaHistorico}}"
-                                                   Converter="{StaticResource ConversorItemSelecionado}" />
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25*"/>
+                <RowDefinition Height="75*"/>
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="0">
+                <Label Margin="15,15,15,15" 
+                       Text="Empresto"
+                       TextColor="Black"
+                       FontFamily="{StaticResource BoldWorkSans}"
+                       FontSize="Large"/>
+                <Button Text="Emprestar/Devolver"
+                        CornerRadius="10"
+                        Margin="15,15,15,20"
+                        BackgroundColor="{StaticResource PrimaryColor}"
+                        TextColor="White"
+                        FontFamily="{StaticResource BoldWorkSans}"
+                        Command="{Binding EmprestarDevolverCommand}"/>
+            </StackLayout>
+            <StackLayout Grid.Row="0" 
+                         VerticalOptions="Start"
+                         HorizontalOptions="EndAndExpand" Orientation="Horizontal">
+                <svg:SvgCachedImage WidthRequest="30" HeightRequest="30" Margin="10" Source="resource://PhoneDealer.Resources.ajuda.svg">
+                    <svg:SvgCachedImage.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AbrirAjudaCommand}" />
+                    </svg:SvgCachedImage.GestureRecognizers>
+                </svg:SvgCachedImage>
+                <svg:SvgCachedImage WidthRequest="30" HeightRequest="30" Margin="10" Source="resource://PhoneDealer.Resources.gerencimaento.svg">
+                    <svg:SvgCachedImage.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AbrirConfiguracaoCommand}" />
+                    </svg:SvgCachedImage.GestureRecognizers>
+                </svg:SvgCachedImage>
 
-                    </b:EventHandlerBehavior>
-                </ListView.Behaviors>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid>
-                                <Label HorizontalOptions="Start" 
-                                       Text="{Binding Modelo}"
-                                       Margin="10"/>
-                                <Label HorizontalOptions="End"
-                                       Margin="0,0,10,0">
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="Emprestado por: "/>
-                                            <Span Text="{Binding NomeEmprestador}"/>
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
-                                <Label Text="{Binding DataEmprestada, StringFormat='{}{0:dd/MM/yyyy}'}"
-                                       HorizontalOptions="Start"
-                                       Grid.Row="1"
-                                       Margin="10,0,0,0">
-                                    
-                                </Label>
-                                <Label Text="Devolvido" Grid.Row="1" HorizontalOptions="End"
-                                       Margin="0,0,10,0">
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="{Binding DevolvidoString}"></Span>
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <Button Text="+" 
+            </StackLayout>
+            <StackLayout Grid.Row="1">
+                <Label Text="Itens" 
+                       FontSize="Large"
+                       Margin="15,20,15,0"
+                       TextColor="Black"
+                       FontFamily="{StaticResource BoldWorkSans}"/>
+                <StackLayout IsVisible="{Binding ItensVazios}" Margin="15">
+                    <Label Text="Nenhum emprestimo cadastrado"
+                           FontFamily="{StaticResource Taviraj}"/>
+                    <Button Text="Gerenciar Itens"
+                            FontSize="Micro"
+                            HeightRequest="30"
+                            Margin="0,0,150,0"
+                            TextColor="White"
+                            BackgroundColor="{StaticResource SecundaryColor}"
+                            CornerRadius="10"
+                            FontFamily="{StaticResource BoldWorkSans}"
+                            Command="{Binding AbrirConfiguracaoCommand}"/>
+
+                </StackLayout>
+
+                <ListView ItemsSource="{Binding ListaTelefone}"
+                          HasUnevenRows="True"
+                          CachingStrategy="RecycleElement"
+                          SeparatorVisibility="None">
+                    <ListView.Behaviors>
+                        <behavior:UnselectListView/>
+                        <b:EventHandlerBehavior EventName="ItemTapped">
+                            <b:InvokeCommandAction Command="{Binding Path=BindingContext.DetalhesEmprestimoCommand, Source={x:Reference PaginaHistorico}}"
+                                               Converter="{StaticResource ConversorItemSelecionado}" />
+                        </b:EventHandlerBehavior>
+                    </ListView.Behaviors>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame Margin="10" 
+                                       Padding="0" 
+                                       CornerRadius="10">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="10*"/>
+                                            <ColumnDefinition Width="90*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="20*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <control:Circle
+                                            Margin="10,10,0,0"
+                                            Grid.Column="0"
+                                            VerticalOptions="Start"
+                                            SphereSize="8"
+                                            SphereColor="{Binding EstadoCor}"/>
+
+                                        <StackLayout Grid.Column="1" Margin="0,15,0,15">
+                                            <Label HorizontalOptions="Start" 
+                                               Text="{Binding Modelo}"
+                                               TextColor="Black"
+                                               FontFamily="{StaticResource BoldTaviraj}"
+                                               Margin="10,0,10,0"/>
+                                            <Label FontSize="Micro"
+                                                   Margin="10,0,10,0">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding DevolvidoString}"></Span>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </StackLayout>
+                                    </Grid>
+                                </Frame>
+
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        
+            <!--<Button Text="+" 
+                    Grid.Row="1"
                     FontSize="Large"
                     Padding="0"
                     CornerRadius="25" 
@@ -73,7 +144,7 @@
                     BackgroundColor="LightBlue" 
                     TextColor="White" 
                     HorizontalOptions="EndAndExpand"
-                    VerticalOptions="EndAndExpand"/>
+                    VerticalOptions="EndAndExpand"/>-->
         </Grid>
     </ContentPage.Content>
 </ContentPage>

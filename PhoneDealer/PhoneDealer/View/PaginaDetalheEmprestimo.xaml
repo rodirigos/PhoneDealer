@@ -5,35 +5,86 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="PhoneDealer.View.PaginaDetalheEmprestimo"
-             xmlns:b="clr-namespace:Behaviors;assembly=Behaviors">
+             xmlns:b="clr-namespace:Behaviors;assembly=Behaviors"
+             xmlns:control="clr-namespace:PhoneDealer.Control"
+             xmlns:behavior="clr-namespace:PhoneDealer.Behavior">
     <ContentPage.Behaviors>
         <b:EventHandlerBehavior EventName="Appearing">
             <b:InvokeCommandAction Command="{Binding OnAppearingCommand}"/>
         </b:EventHandlerBehavior>
     </ContentPage.Behaviors>
     <ContentPage.Content>
-        <StackLayout Margin="10">
-            <Label Text="{Binding EmprestimoSelecionado.Modelo, StringFormat='Modelo: {0}'}"/>
-            <Label Text="{Binding EmprestimoSelecionado.NomeEmprestador, StringFormat='Ultimo emprestimo por: {0}'}"/>
-            <Label Text="{Binding EmprestimoSelecionado.DataEmprestada, StringFormat='Data Emprestada: {0}'}"/>
-            <Label IsVisible="{Binding EmprestimoSelecionado.Devolvido}" Text="{Binding EmprestimoSelecionado.DataDevolvida, StringFormat='Data Devolvida: {0}'}"/>
-            <Label Text="{Binding EmprestimoSelecionado.DevolvidoString}"/>
-            <StackLayout Orientation="Horizontal">
-                <Button Text="Cancelar"
-                        Visual="Material"
-                        Command="{Binding CancelarCommand}"/>
-                <Button Text="Devolver Aparelho" 
-                        IsVisible="{Binding NaoDevolvido}" 
-                        Command="{Binding DevolverCommand}"
-                        Visual="Material"/>
-            </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="80*"/>
+            </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0">
+                    <Label Margin="15,15,15,5" 
+                       Text="Histórico"
+                       TextColor="Black"
+                       FontFamily="{StaticResource BoldWorkSans}"
+                       FontSize="Large"/>
+                    <Label Margin="15,0,15,15" 
+                       Text="{Binding EmprestimoSelecionado.Modelo}"
+                       TextColor="Black"
+                       FontFamily="{StaticResource WorkSans}"
+                       FontSize="Medium"/>
+                </StackLayout>
+            <ListView ItemsSource="{Binding ListaEmprestimo}"
+                          HasUnevenRows="True"
+                          CachingStrategy="RecycleElement"
+                          SeparatorVisibility="None"
+                          Grid.Row="1">
+                <ListView.Behaviors>
+                    <behavior:UnselectListView/>
+                </ListView.Behaviors>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame Margin="10" 
+                                       Padding="0" 
+                                       CornerRadius="10">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="10*"/>
+                                            <ColumnDefinition Width="90*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="20*"/>
+                                        </Grid.RowDefinitions>
 
+                                        <control:Circle
+                                            Margin="10,10,0,0"
+                                            Grid.Column="0"
+                                            VerticalOptions="Start"
+                                            SphereSize="8"
+                                            SphereColor="{Binding EstadoCor}"/>
 
-            <Button HorizontalOptions="EndAndExpand"
-                    Text="Remover registro"
-                    Visual="Material"
-                    Command="{Binding RemoverCommand}"/>
+                                        <StackLayout Grid.Column="1" Margin="0,15,0,15">
+                                            <Label HorizontalOptions="Start" 
+                                               Text="{Binding DevolvidoStringDetalhe}"
+                                               TextColor="Black"
+                                               FontFamily="{StaticResource BoldTaviraj}"
+                                               Margin="10,0,10,0"/>
+                                            <Label FontSize="Micro"
+                                                   Margin="10,0,10,0">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding DataAtualizada}"></Span>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </StackLayout>
 
-        </StackLayout>
+                                    </Grid>
+                                </Frame>
+
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

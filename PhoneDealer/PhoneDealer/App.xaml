@@ -6,6 +6,32 @@
              mc:Ignorable="d"
              x:Class="PhoneDealer.App">
     <Application.Resources>
+        <ResourceDictionary>
+            
+            <Color x:Key="PrimaryColor">#29c2f2</Color>
+            <Color x:Key="SecundaryColor">#004c64</Color>
+            <Color x:Key="Danger">#f22929</Color>
+            <Color x:Key="Positive">#10ee1f</Color>
+            <Color x:Key="BackgroundUnselected">#f8f8f8</Color>
+            <Color x:Key="BackgroundSelected">#004c64</Color>
+            <Color x:Key="TextColor">#707070</Color>
 
+            <OnPlatform x:TypeArguments="x:String" x:Key="BoldTaviraj">
+                <On Platform="Android" Value="Taviraj-Bold.ttf#Taviraj"/>
+            </OnPlatform>
+
+            <OnPlatform x:TypeArguments="x:String" x:Key="Taviraj">
+                <On Platform="Android" Value="Taviraj-Regular.ttf#Taviraj"/>
+            </OnPlatform>
+
+            <OnPlatform x:TypeArguments="x:String" x:Key="BoldWorkSans">
+                <On Platform="Android" Value="WorkSans-Bold.ttf#Work Sans"/>
+            </OnPlatform>
+
+            <OnPlatform x:TypeArguments="x:String" x:Key="WorkSans">
+                <On Platform="Android" Value="WorkSans-Regular.ttf#Work Sans"/>
+            </OnPlatform>
+
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="85" height="85" viewBox="0 0 85 85">
+  <defs>
+    <filter id="Retângulo_27" x="0" y="0" width="85" height="85" filterUnits="userSpaceOnUse">
+      <feOffset dy="1" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="7.5" result="blur"/>
+      <feFlood flood-opacity="0.231"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="apagar" transform="translate(-276.5 -460.5)">
+    <g transform="matrix(1, 0, 0, 1, 276.5, 460.5)" filter="url(#Retângulo_27)">
+      <rect id="Retângulo_27-2" data-name="Retângulo 27" width="40" height="40" rx="10" transform="translate(22.5 21.5)" fill="#29c2f2"/>
+    </g>
+    <g id="delete-24px" transform="translate(307 490)">
+      <path id="Caminho_13" data-name="Caminho 13" d="M6,19a2.006,2.006,0,0,0,2,2h8a2.006,2.006,0,0,0,2-2V7H6ZM19,4H15.5l-1-1h-5l-1,1H5V6H19Z" fill="#fff"/>
+      <path id="Caminho_14" data-name="Caminho 14" d="M0,0H24V24H0Z" fill="none"/>
+    </g>
+  </g>
+</svg>

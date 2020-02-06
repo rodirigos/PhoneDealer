@@ -2,8 +2,8 @@
 using PhoneDealer.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -21,15 +21,15 @@ namespace PhoneDealer.ViewModel
             DevolverCommand = new Command(async () => await Devolver());
             RemoverCommand = new Command(async () => await Remover());
             CancelarCommand = new Command(async () => await App.navigationPage.PopAsync());
-          
-          
+            ListaEmprestimo = new ObservableCollection<ItemEmprestimoDao>();
         }
 
         #region Propridades
-        private List<TelefoneEmprestimo> listaEmprestimo { get; set; }
+        private List<ItemEmprestimoDao> listaEmprestimo { get; set; }
+        public ObservableCollection<ItemEmprestimoDao> ListaEmprestimo { get; set; }
 
-        private TelefoneEmprestimo emprestimoSelecionado;
-        public TelefoneEmprestimo EmprestimoSelecionado
+        private ItemEmprestimoDao emprestimoSelecionado;
+        public ItemEmprestimoDao EmprestimoSelecionado
         {
             get => emprestimoSelecionado;
             set => SetValue(ref emprestimoSelecionado, value);
@@ -50,19 +50,25 @@ namespace PhoneDealer.ViewModel
         #endregion
 
         #region Funcoes
-        
+
         public void NoAparecimento()
         {
             NaoDevolvido = !emprestimoSelecionado.Devolvido;
-            
+            ListaEmprestimo.Clear();
+            listaEmprestimo.Where(x => x.IdTelefone == emprestimoSelecionado.IdTelefone)
+               .OrderByDescending(z => z.DataAtualizada)
+               .ToList()
+               .ForEach(y => ListaEmprestimo.Add(y));
+
         }
 
         public async Task Devolver()
         {
-            var emprestado =listaEmprestimo.FirstOrDefault(x => x.Id == EmprestimoSelecionado.Id);
+            var emprestado = listaEmprestimo.FirstOrDefault(x => x.IdTelefone == EmprestimoSelecionado.IdTelefone);
             emprestado.Devolvido = true;
             emprestado.DataDevolvida = DateTime.Now;
-            servicoArmazenamento.SalvarListaEmprestimo(listaEmprestimo);
+            servicoArmazenamento.AtualizarEmprestimo(emprestado);
+            //servicoArmazenamento.SalvarListaEmprestimo(listaEmprestimo);
             MessagingCenter.Send<string>("Update", "");
             await App.navigationPage.PopAsync();
         }
@@ -70,7 +76,8 @@ namespace PhoneDealer.ViewModel
         public async Task Remover()
         {
             listaEmprestimo.RemoveAll(x => x.Id == EmprestimoSelecionado.Id);
-            servicoArmazenamento.SalvarListaEmprestimo(listaEmprestimo);
+            servicoArmazenamento.RemoverEmprestimo(EmprestimoSelecionado);
+            //servicoArmazenamento.SalvarListaEmprestimo(listaEmprestimo);
             MessagingCenter.Send<string>("Update", "");
             await App.navigationPage.PopAsync();
         }

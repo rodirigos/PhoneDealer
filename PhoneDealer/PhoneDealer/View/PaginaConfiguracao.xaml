@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="PhoneDealer.View.PaginaConfiguracao"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:control="clr-namespace:PhoneDealer.Control"
+             xmlns:b="clr-namespace:Behaviors;assembly=Behaviors"
+             x:Name="configuracaoPagina"
+             xmlns:behavior="clr-namespace:PhoneDealer.Behavior">
+    <ContentPage.Behaviors>
+        <b:EventHandlerBehavior EventName="Appearing">
+            <b:InvokeCommandAction Command="{Binding OnAppearingCommand}"/>
+        </b:EventHandlerBehavior>
+    </ContentPage.Behaviors>
+    <ContentPage.Content>
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="45*"/>
+                <RowDefinition Height="45*"/>
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="0" Orientation="Horizontal">
+                <svg:SvgCachedImage WidthRequest="30" HeightRequest="30" Margin="10" Source="resource://PhoneDealer.Resources.voltar.svg">
+                    <svg:SvgCachedImage.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding VoltarCommand}" />
+                    </svg:SvgCachedImage.GestureRecognizers>
+                </svg:SvgCachedImage>
+            </StackLayout>
+            <StackLayout Grid.Row="1">
+                <Label Margin="15,0,15,5" 
+                Text="Gerenciamento"
+                TextColor="Black"
+                FontFamily="{StaticResource BoldWorkSans}"
+                FontSize="Large"/>
+
+                <StackLayout Orientation="Horizontal" Margin="15,0,15,10">
+                    <Button BackgroundColor="{Binding CorFundoItens}" 
+                            Text="Itens"
+                            HeightRequest="40"
+                            CornerRadius="15"
+                            Command="{Binding ItensAtivoCommand}"
+                            HorizontalOptions="FillAndExpand"
+                            TextColor="{Binding CorTextoItens}"></Button>
+                    <Button Text="Usuários"
+                            HeightRequest="40"
+                            CornerRadius="15"
+                            FontFamily="{StaticResource WorkSans}"
+                            Command="{Binding UsuariosAtivoCommand }"
+                            HorizontalOptions="FillAndExpand"
+                            BackgroundColor="{Binding CorFundoUsuarios}"
+                            TextColor="{Binding CorTextoUsuarios}"></Button>
+                </StackLayout>
+
+                <Frame Padding="0" Margin="20,5" CornerRadius="5"
+                       BackgroundColor="{StaticResource BackgroundUnselected}">
+                    <control:CustomEntry
+                       TextColor="{StaticResource TextColor}"
+                       FontFamily="{StaticResource Taviraj}"
+                       Text="{Binding NomeItem}"
+                        PlaceholderColor="{StaticResource TextColor}"
+                       Placeholder="Escreva o nome do item"/>
+                </Frame>
+                <Button
+                    CornerRadius="10"
+                    Margin="20,0"
+                    Text="Cadastrar"
+                    Command="{Binding CadastrarCommand}"
+                    FontFamily="{StaticResource BoldWorkSans}"
+                    BackgroundColor="{StaticResource PrimaryColor}"
+                    TextColor="White"/>
+
+            </StackLayout>
+            <StackLayout IsVisible="{Binding ItensAtivo}" Grid.Row="2" 
+                         BackgroundColor="#F8f8f8">
+                <Label  Margin="15,20,15,5"  
+                        Text="Itens Cadastrados"
+                        TextColor="Black"
+                        FontFamily="{StaticResource WorkSans}"
+                        FontSize="Medium"/>
+                <ListView ItemsSource="{Binding ListaItemEmprestimo}"
+                          HasUnevenRows="True"
+                          SeparatorVisibility="None"
+                          CachingStrategy="RecycleElement">
+                    <ListView.Behaviors>
+                        <behavior:UnselectListView/>
+                    </ListView.Behaviors>
+                    
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame CornerRadius="5" 
+                                       BackgroundColor="White" 
+                                       Margin="20,5" Padding="0">
+                                    <StackLayout Orientation="Horizontal"
+                                                 VerticalOptions="Center"
+                                                 Padding="0"
+                                                 Margin="0">
+                                        <Label Text="{Binding Descricao}"
+                                               TextColor="Black"
+                                               Margin="20,0"
+                                               Padding="0"                                               
+                                               VerticalOptions="Center"
+                                               FontFamily="{StaticResource BoldWorkSans}"/>
+                                        <svg:SvgCachedImage WidthRequest="60" 
+                                                            HeightRequest="60"
+                                                            VerticalOptions="Start"
+                                                            Source="resource://PhoneDealer.Resources.copiar.svg"                                                            
+                                                            HorizontalOptions="EndAndExpand">
+                                            <svg:SvgCachedImage.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Path=BindingContext.CopiarItemCommand,  Source={x:Reference configuracaoPagina}}" 
+                                                                      CommandParameter="{Binding .}"/>
+                                            </svg:SvgCachedImage.GestureRecognizers>
+                                        </svg:SvgCachedImage>
+                                        <svg:SvgCachedImage WidthRequest="60" 
+                                                            HeightRequest="60"
+                                                            VerticalOptions="Start"
+                                                            Margin="0"
+                                                            Source="resource://PhoneDealer.Resources.apagar.svg">
+                                            <svg:SvgCachedImage.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Path=BindingContext.RemoverItemCommand, Source={x:Reference configuracaoPagina}}" 
+                                                                      CommandParameter="{Binding .}"/>
+                                            </svg:SvgCachedImage.GestureRecognizers>
+                                        </svg:SvgCachedImage>
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                    </ListView>
+            </StackLayout>
+            <StackLayout IsVisible="{Binding UsuarioAtivo}" Grid.Row="2"
+                         BackgroundColor="#F8f8f8">
+                           <Label  Margin="15,20,15,5"  
+                            Text="Usuários cadastrados"
+                            TextColor="Black"
+                            FontFamily="{StaticResource WorkSans}"
+                            FontSize="Medium"/>
+                <ListView ItemsSource="{Binding ListaEmprestador}"
+                          HasUnevenRows="True"
+                          SeparatorVisibility="None"
+                          CachingStrategy="RecycleElement">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame CornerRadius="5" 
+                                       BackgroundColor="White" 
+                                       Margin="20,5" Padding="0">
+                                    <StackLayout Orientation="Horizontal"
+                                                 VerticalOptions="Center"
+                                                 Padding="0"
+                                                 Margin="0">
+                                        <Label Text="{Binding Nome}"
+                                               TextColor="Black"
+                                               Margin="20,0"
+                                               Padding="0"                                               
+                                               VerticalOptions="Center"
+                                               FontFamily="{StaticResource BoldWorkSans}"/>
+                                        <svg:SvgCachedImage WidthRequest="60" 
+                                                            HeightRequest="60"
+                                                            VerticalOptions="Start"
+                                                            HorizontalOptions="EndAndExpand"
+                                                            Margin="0"
+                                                            Source="resource://PhoneDealer.Resources.apagar.svg">
+                                            <svg:SvgCachedImage.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Path=BindingContext.RemoverEmprestadorCommand, Source={x:Reference configuracaoPagina}}" 
+                                                                      CommandParameter="{Binding .}"/>
+                                            </svg:SvgCachedImage.GestureRecognizers>
+                                        </svg:SvgCachedImage>
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+            </Grid>
+      
+    </ContentPage.Content>
+</ContentPage>

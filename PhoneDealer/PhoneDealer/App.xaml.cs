@@ -1,8 +1,9 @@
-﻿using PhoneDealer.Services;
+﻿using PhoneDealer.Models;
+using PhoneDealer.Services;
 using PhoneDealer.View;
-using System;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace PhoneDealer
 {
@@ -13,6 +14,7 @@ namespace PhoneDealer
         {
             InitializeComponent();
             InicializarInterfaces();
+            Permissoes();
             navigationPage = new NavigationPage(new PaginaListaTelefones());
             MainPage = navigationPage;
         }
@@ -20,6 +22,16 @@ namespace PhoneDealer
         void InicializarInterfaces()
         {
             DependencyService.Register<IArmazenamentoService, ArmazenamentoService>();
+            DependencyService.Register<ILeitorQrService, LeitorQrService>();
+            //DependencyService.Register<IRepository<Emprestador>, Repository<Emprestador>>();
+            //DependencyService.Register<IEmprestimoDaoRepository, Repository<ItemEmprestimoDao>>();
+            //DependencyService.Register<IRepository<ItemEmprestimo>, Repository<ItemEmprestimo>>();
+
+        }
+
+        async void Permissoes()
+        {
+            var status = await CrossPermissions.Current.RequestPermissionsAsync(new[] { Permission.Storage });
         }
 
         protected override void OnStart()

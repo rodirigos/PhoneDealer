@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Threading.Tasks;
 
 namespace PhoneDealer.Services
 {
     public interface ILeitorQrService
     {
+        Task<string> LerQrCode();
+
+        Task<string> GerarImageQrCode();
     }
 }

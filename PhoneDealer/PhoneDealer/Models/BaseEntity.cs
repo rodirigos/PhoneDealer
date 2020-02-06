@@ -4,10 +4,8 @@ using System.Text;
 
 namespace PhoneDealer.Models
 {
-    public class Telefone
+    public class BaseEntity
     {
-        public int Id { get; set; }
-        public string  Modelo { get; set; }
-        
+        public long DbId { get; set; }
     }
 }

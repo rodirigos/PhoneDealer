@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PhoneDealer.Models
+﻿namespace PhoneDealer.Models
 {
-    public class Emprestador
+    public class Emprestador : BaseEntity
     {
-        public int Id { get; set; }
+        public Emprestador(string id, string nome)
+        {
+            Id = id;
+            Nome = nome;
+        }
+        public Emprestador()
+        {
+
+        }
+        public string Id { get; set; }
         public string Nome { get; set; }
         public bool emDebito { get; set; }
     }

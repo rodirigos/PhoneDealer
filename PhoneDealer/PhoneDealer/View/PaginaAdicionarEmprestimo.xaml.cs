@@ -1,9 +1,5 @@
-﻿using PhoneDealer.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PhoneDealer.Models;
+using PhoneDealer.ViewModel;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -13,10 +9,10 @@ namespace PhoneDealer.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PaginaAdicionarEmprestimo : ContentPage
     {
-        public PaginaAdicionarEmprestimo()
+        public PaginaAdicionarEmprestimo(ItemEmprestimo emprestimo)
         {
             InitializeComponent();
-            BindingContext = new AdicionarEmprestimoViewModel();
+            BindingContext = new AdicionarEmprestimoViewModel(emprestimo);
         }
     }
 }

@@ -1,11 +1,10 @@
-﻿using PhoneDealer.ViewModel;
+﻿using Newtonsoft.Json;
+using PhoneDealer.ViewModel;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PhoneDealer.Models
 {
-    public class TelefoneEmprestimo : BaseViewModel
+    public class ItemEmprestimoDao : BaseViewModel
     {
         public Guid Id { get; set; }
 
@@ -14,7 +13,7 @@ namespace PhoneDealer.Models
 
         private string modelo;
         public string Modelo { get => modelo; set => SetValue(ref modelo, value); }
-        public int IdTelefone { get; set; }
+        public string IdTelefone { get; set; }
 
         private string nomeEmprestador;
         public string NomeEmprestador { get => nomeEmprestador; set => SetValue(ref nomeEmprestador, value); }
@@ -24,6 +23,8 @@ namespace PhoneDealer.Models
         public DateTime DataEmprestada { get => dataEmprestada; set => SetValue(ref dataEmprestada, value); }
         private DateTime dataDevolvida;
         public DateTime DataDevolvida { get => dataDevolvida; set => SetValue(ref dataDevolvida, value); }
+        public DateTime DataAtualizada { get; set; }
+
         private bool devolvido;
         public bool Devolvido
         {
@@ -35,11 +36,33 @@ namespace PhoneDealer.Models
 
         }
 
+        [JsonIgnore]
+        public string DevolvidoStringDetalhe
+        {
+            get
+            {
+                return Devolvido ? $"Devolvido por {NomeEmprestador}" : $"Emprestado para {NomeEmprestador} ";
+            }
+        }
+
+        [JsonIgnore]
         public string DevolvidoString
         {
             get
             {
-                return Devolvido ? $"Devolvido em {DataDevolvida.ToString("dd/MM/yyyy")}" : "Não Devolvido";
+                return Devolvido ? $"Devolvido por {NomeEmprestador} as {DataDevolvida.ToString("dd/MM/yyyy")}" : $"Emprestado para {NomeEmprestador} as {DataEmprestada.ToString("dd/MM/yyyy")}";
+            }
+        }
+
+        [JsonIgnore]
+        public string EstadoCor
+        {
+            get
+            {
+                if (Devolvido)
+                    return "#10ee1f";
+                else
+                    return "#f22929";
             }
         }
     }

@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="PhoneDealer.View.PaginaAjuda"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <svg:SvgCachedImage WidthRequest="30" 
+                                    HeightRequest="30" 
+                                    Margin="10"
+                                    Source="resource://PhoneDealer.Resources.voltar.svg">
+                    <svg:SvgCachedImage.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                    </svg:SvgCachedImage.GestureRecognizers>
+                </svg:SvgCachedImage>
+                <Label Text="Ajuda"
+                       Margin="10,20,10,20"
+                       FontFamily="{StaticResource WorkSans}"
+                       FontSize="Large"/>
+            </StackLayout>
+            <StackLayout >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="80*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <svg:SvgCachedImage WidthRequest="30" 
+                                        HeightRequest="30" 
+                                        Margin="10"
+                                        HorizontalOptions="Center"
+                                        Grid.Column="0"
+                                        Grid.Row="0"
+                                        Source="resource://PhoneDealer.Resources.gerencimaento.svg"/>
+
+                    <StackLayout Grid.Column="1"
+                                 Grid.Row="0"
+                                 Margin="0,0,20,0">
+                        <Label Text="Passo 1"
+                           FontFamily="{StaticResource Taviraj}"
+                           FontSize="Micro"/>
+                        <Label Text="Cadastre seus itens e usuários na tela de Gerenciamento."
+                               FontFamily="{StaticResource BoldWorkSans}"/>
+
+                    </StackLayout>
+
+                    <svg:SvgCachedImage WidthRequest="30" 
+                                        HeightRequest="30" 
+                                        HorizontalOptions="Center"
+                                        Margin="10"
+                                        Grid.Column="0"
+                                        Grid.Row="1"
+                                        Source="resource://PhoneDealer.Resources.copiar.svg"/>
+
+
+                    <StackLayout Grid.Column="1"
+                                 Grid.Row="1"
+                                 Margin="0,0,20,0">
+                        <Label Text="Passo 2"
+                           FontFamily="{StaticResource Taviraj}"
+                           FontSize="Micro"/>
+                        <Label Text="Copie o QR Code e imprima para colar nos seus itens."
+                               FontFamily="{StaticResource BoldWorkSans}"/>
+
+                    </StackLayout>
+
+                    <svg:SvgCachedImage WidthRequest="20" 
+                                        HeightRequest="20" 
+                                        HorizontalOptions="Center"
+                                        Margin="10"
+                                        Grid.Column="0"
+                                        Grid.Row="2"
+                                        Source="resource://PhoneDealer.Resources.devolvido.svg"/>
+
+
+                    <StackLayout Grid.Column="1"
+                                 Grid.Row="2"
+                                 Margin="0,0,20,0">
+                        <Label Text="Passo 3"
+                           FontFamily="{StaticResource Taviraj}"
+                           FontSize="Micro"/>
+                        <Label Text="Pronto! Agora você pode emprestar ou devolver itens."
+                               FontFamily="{StaticResource BoldWorkSans}"/>
+
+                    </StackLayout>
+
+
+                </Grid>
+            </StackLayout>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

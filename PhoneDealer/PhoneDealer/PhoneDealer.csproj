@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -6,18 +6,60 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\ajuda.svg" />
+    <None Remove="Resources\apagar.svg" />
+    <None Remove="Resources\copiar.svg" />
+    <None Remove="Resources\devolvido.svg" />
+    <None Remove="Resources\emprestado.svg" />
+    <None Remove="Resources\Empresto.svg" />
+    <None Remove="Resources\fechar.svg" />
+    <None Remove="Resources\gerencimaento.svg" />
+    <None Remove="Resources\voltar.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ajuda.svg" />
+    <EmbeddedResource Include="Resources\apagar.svg" />
+    <EmbeddedResource Include="Resources\copiar.svg" />
+    <EmbeddedResource Include="Resources\devolvido.svg" />
+    <EmbeddedResource Include="Resources\emprestado.svg" />
+    <EmbeddedResource Include="Resources\Empresto.svg" />
+    <EmbeddedResource Include="Resources\fechar.svg" />
+    <EmbeddedResource Include="Resources\gerencimaento.svg" />
+    <EmbeddedResource Include="Resources\voltar.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Behaviors.Forms" Version="1.4.0" />
+    <PackageReference Include="LiteDB" Version="4.1.4" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.1.1" />
+    <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.Forms" Version="4.4.0.991265" />
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
     <PackageReference Include="Xamarin.Forms.Visual.Material" Version="4.4.0.991265" />
+    <PackageReference Include="ZXing.Net.Mobile" Version="2.4.1" />
+    <PackageReference Include="ZXing.Net.Mobile.Forms" Version="2.4.1" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="View\PaginaAdicionarEmprestimo.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="View\PaginaAjuda.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\PaginaConfiguracao.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="View\PaginaDetalheEmprestimo.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\PaginaExibirQrCode.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\PaginaListaTelefones.xaml">

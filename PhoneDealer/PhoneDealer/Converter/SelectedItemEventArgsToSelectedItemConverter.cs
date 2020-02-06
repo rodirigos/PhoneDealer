@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using Xamarin.Forms;
 
 namespace PhoneDealer.Converter
 {
-    public class SelectedItemEventArgsToSelectedItemConverter: IValueConverter
+    public class SelectedItemEventArgsToSelectedItemConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

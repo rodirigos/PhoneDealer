@@ -1,13 +1,23 @@
 ﻿using PhoneDealer.Models;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PhoneDealer.Services
 {
     public interface IArmazenamentoService
-    {
-        void SalvarListaEmprestimo(List<TelefoneEmprestimo> listaTelefoneEmprestimo);
-        List<TelefoneEmprestimo> ResgatarListaEmprestimo();   
+    {    
+        void AdicionarEmprestimo(ItemEmprestimoDao itemEmprestimoDao);
+        void RemoverEmprestimo(ItemEmprestimoDao itemEmprestimoDao);
+        void AtualizarEmprestimo(ItemEmprestimoDao itemEmprestimoDao);
+        List<ItemEmprestimoDao> ResgatarListaEmprestimo();
+
+        void AdicionarItem(ItemEmprestimo item);
+        void RemoverItem(ItemEmprestimo item);
+        void AtualizarItem(ItemEmprestimo item);
+        List<ItemEmprestimo> ResgatarListaItens();
+
+
+        void AdicionarEmprestador(Emprestador emprestador);
+        void RemoverEmprestador(Emprestador emprestador);
+        List<Emprestador> ResgatarListaEmprestador();
     }
 }
