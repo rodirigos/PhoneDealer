@@ -23,7 +23,6 @@ namespace PhoneDealer
         {
             DependencyService.Register<IArmazenamentoService, ArmazenamentoService>();
             DependencyService.Register<ILeitorQrService, LeitorQrService>();
-            
         }
 
         async void Permissoes()

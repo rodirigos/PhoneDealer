@@ -12,9 +12,9 @@ namespace PhoneDealer.Services
     {
 
         LiteDatabase _database;
-        LiteCollection<Emprestador> Emprestadores;
-        LiteCollection<ItemEmprestimoDao> HistoricoEmprestimos;
-        LiteCollection<ItemEmprestimo> ListaItensEmprestimo;
+        ILiteCollection<Emprestador> Emprestadores;
+        ILiteCollection<ItemEmprestimoDao> HistoricoEmprestimos;
+        ILiteCollection<ItemEmprestimo> ListaItensEmprestimo;
         readonly IDbFolder dbFolder;
 
 
@@ -48,7 +48,7 @@ namespace PhoneDealer.Services
 
         public void RemoverEmprestimo(ItemEmprestimoDao itemEmprestimoDao)
         {
-            HistoricoEmprestimos.Delete(x=> x.DbId == itemEmprestimoDao.DbId);
+            HistoricoEmprestimos.Delete(itemEmprestimoDao.DbId);
         }
 
         public void AtualizarEmprestimo(ItemEmprestimoDao itemEmprestimoDao)
@@ -74,7 +74,7 @@ namespace PhoneDealer.Services
 
         public void RemoverItem(ItemEmprestimo item)
         {
-            ListaItensEmprestimo.Delete(x => x.DbId == item.DbId);
+            ListaItensEmprestimo.Delete(item.DbId);
         }
 
         public void AtualizarItem(ItemEmprestimo item)
@@ -89,7 +89,7 @@ namespace PhoneDealer.Services
 
         public void RemoverEmprestador(Emprestador emprestador)
         {
-            Emprestadores.Delete(x=> x.DbId ==emprestador.DbId);
+            Emprestadores.Delete(emprestador.DbId);
         }
     }
 }

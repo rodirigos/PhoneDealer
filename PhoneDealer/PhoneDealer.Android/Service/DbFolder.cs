@@ -12,7 +12,7 @@ namespace PhoneDealer.Droid.Service
     {
         public string CaminhoArquivo()
         {
-            string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+            string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);
             return Path.Combine(path, "empresto.db");
         }
     }
