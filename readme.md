@@ -12,19 +12,13 @@ de QRCode
 
 # Imagens do aplicativo
 
-![alt text](https://github.com/rodirigos/PhoneDealer/blob/master/images/1.png)
-
-![alt text](https://github.com/rodirigos/PhoneDealer/blob/master/images/2.png)
-
-![alt text](https://github.com/rodirigos/PhoneDealer/blob/master/images/3.png)
-
-![alt text](https://github.com/rodirigos/PhoneDealer/blob/master/images/4.png)
-
-![alt text](https://github.com/rodirigos/PhoneDealer/blob/master/images/5.png)
-
-![alt text](https://github.com/rodirigos/PhoneDealer/blob/master/images/6.png)
-
-![alt text](https://github.com/rodirigos/PhoneDealer/blob/master/images/7.png)
+<img src="https://github.com/rodirigos/PhoneDealer/blob/master/images/1.png" width="300"/>
+<img src="https://github.com/rodirigos/PhoneDealer/blob/master/images/2.png" width="300"/>
+<img src="https://github.com/rodirigos/PhoneDealer/blob/master/images/3.png" width="300"/>
+<img src="https://github.com/rodirigos/PhoneDealer/blob/master/images/4.png" width="300"/>
+<img src="https://github.com/rodirigos/PhoneDealer/blob/master/images/5.png" width="300"/>
+<img src="https://github.com/rodirigos/PhoneDealer/blob/master/images/6.png" width="300"/>
+<img src="https://github.com/rodirigos/PhoneDealer/blob/master/images/7.png" width="300"/>
 
 
 Desenvolvido por:
