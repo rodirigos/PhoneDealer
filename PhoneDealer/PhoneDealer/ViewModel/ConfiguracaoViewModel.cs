@@ -154,19 +154,30 @@ namespace PhoneDealer.ViewModel
             await Clipboard.SetTextAsync(item.Id);
             await App.navigationPage.PushAsync(new PaginaExibirQrCode(item));
         }
-        private void RemoverItem(ItemEmprestimo item)
+        private async Task RemoverItem(ItemEmprestimo item)
         {
-            ListaItemEmprestimo.Remove(item);
-            listaItemEmprestimo.Remove(item);
-            servicoArmazenamento.RemoverItem(item);
+            var resp = await App.navigationPage.DisplayAlert("Alerta", "Você tem certeza que deseja remover esse Item?", "Sim", "Cancelar");
+            if(resp)
+            {
+                ListaItemEmprestimo.Remove(item);
+                listaItemEmprestimo.Remove(item);
+                servicoArmazenamento.RemoverItem(item);
+            }
+            
             
         }
 
-        private void RemoverEmprestador(Emprestador emprestador)
+        private async Task RemoverEmprestador(Emprestador emprestador)
         {
-            ListaEmprestador.Remove(emprestador);
-            listaEmprestador.Remove(emprestador);
-            servicoArmazenamento.RemoverEmprestador(emprestador);
+
+            var resp = await App.navigationPage.DisplayAlert("Alerta", "Você tem certeza que deseja remover esse usuário?", "Sim", "Cancelar");
+            if(resp)
+            {
+                ListaEmprestador.Remove(emprestador);
+                listaEmprestador.Remove(emprestador);
+                servicoArmazenamento.RemoverEmprestador(emprestador);
+            }
+            
         }
 
 

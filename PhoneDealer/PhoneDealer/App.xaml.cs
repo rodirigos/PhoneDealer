@@ -23,10 +23,7 @@ namespace PhoneDealer
         {
             DependencyService.Register<IArmazenamentoService, ArmazenamentoService>();
             DependencyService.Register<ILeitorQrService, LeitorQrService>();
-            //DependencyService.Register<IRepository<Emprestador>, Repository<Emprestador>>();
-            //DependencyService.Register<IEmprestimoDaoRepository, Repository<ItemEmprestimoDao>>();
-            //DependencyService.Register<IRepository<ItemEmprestimo>, Repository<ItemEmprestimo>>();
-
+            
         }
 
         async void Permissoes()

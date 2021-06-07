@@ -20,7 +20,7 @@ namespace PhoneDealer.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
-
+            
             base.OnCreate(savedInstanceState);
             CachedImageRenderer.Init(true);
             //DependencyService.Register<IImprimirService, ImprimirService>();

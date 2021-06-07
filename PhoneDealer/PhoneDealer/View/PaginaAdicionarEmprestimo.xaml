@@ -1,67 +1,74 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="PhoneDealer.View.PaginaAdicionarEmprestimo"
-             xmlns:b="clr-namespace:Behaviors;assembly=Behaviors"
-             xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-             NavigationPage.HasNavigationBar="False">
+<ContentPage
+    x:Class="PhoneDealer.View.PaginaAdicionarEmprestimo"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:b="clr-namespace:Behaviors;assembly=Behaviors"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:svg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    NavigationPage.HasNavigationBar="False"
+    mc:Ignorable="d">
     <ContentPage.Behaviors>
         <b:EventHandlerBehavior EventName="Appearing">
-            <b:InvokeCommandAction Command="{Binding OnAppearingCommand}"/>
+            <b:InvokeCommandAction Command="{Binding OnAppearingCommand}" />
         </b:EventHandlerBehavior>
     </ContentPage.Behaviors>
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Orientation="Horizontal">
-                <Label Text="Devolver"
-                       Margin="15"
-                       FontSize="Large"
-                       IsVisible="{Binding Devolucao}"
-                       FontFamily="{StaticResource WorkSans}"/>
-                <Label Text="Emprestar"
-                       Margin="15"
-                       FontSize="Large"
-                       IsVisible="{Binding Emprestimo}"
-                       FontFamily="{StaticResource WorkSans}"/>
-                <svg:SvgCachedImage WidthRequest="30" 
-                                    HeightRequest="30"
-                                    Margin="0,0,20,0"
-                                    VerticalOptions="Center"
-                                    HorizontalOptions="EndAndExpand"
-                                    Source="resource://PhoneDealer.Resources.fechar.svg">
+                <Label
+                    Margin="15"
+                    FontFamily="{StaticResource WorkSans}"
+                    FontSize="Large"
+                    IsVisible="{Binding Devolucao}"
+                    Text="Devolver" />
+                <Label
+                    Margin="15"
+                    FontFamily="{StaticResource WorkSans}"
+                    FontSize="Large"
+                    IsVisible="{Binding Emprestimo}"
+                    Text="Emprestar" />
+                <svg:SvgCachedImage
+                    Margin="0,0,20,0"
+                    HeightRequest="30"
+                    HorizontalOptions="EndAndExpand"
+                    Source="resource://PhoneDealer.Resources.fechar.svg"
+                    VerticalOptions="Center"
+                    WidthRequest="30">
                     <svg:SvgCachedImage.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding VoltarTelaDeEmprestimoCommand}"/>
+                        <TapGestureRecognizer Command="{Binding VoltarTelaDeEmprestimoCommand}" />
                     </svg:SvgCachedImage.GestureRecognizers>
                 </svg:SvgCachedImage>
             </StackLayout>
-            
-            <StackLayout Margin="20" IsVisible="{Binding Emprestimo}">
-                <Label Text="{Binding ItemEncontrado.Descricao}"
-                   TextColor="#004c64"
-                   FontSize="Large"
-                   FontFamily="{StaticResource BoldWorkSans}"/>
-                <Label Text="Emprestar para: "
-                       FontFamily="{StaticResource WorkSans}">
-                    
-                </Label>
-                <Picker BackgroundColor="#F8f8f8"
-                    ItemDisplayBinding="{Binding Nome}"
-                    SelectedIndex="{Binding Indice}"
-                    ItemsSource="{Binding ListaEmprestador}"/>
-            </StackLayout>
-            <Button HorizontalOptions="FillAndExpand"
-                    Text="Confirmar"
-                    Margin="20,0,20,0"
-                    TextColor="White"
-                    BackgroundColor="{StaticResource PrimaryColor}"
-                    CornerRadius="5"
+
+            <StackLayout
+                Margin="20"
+                IsVisible="{Binding Emprestimo}">
+                <Label
                     FontFamily="{StaticResource BoldWorkSans}"
-                    Command="{Binding AdicionarDevolverEmprestimoCommand}">
-            </Button>
-            
+                    FontSize="Large"
+                    Text="{Binding ItemEncontrado.Descricao}"
+                    TextColor="#004c64" />
+                <Label
+                    FontFamily="{StaticResource WorkSans}"
+                    Text="Emprestar para: " />
+                <Picker
+                    BackgroundColor="#F8f8f8"
+                    ItemDisplayBinding="{Binding Nome}"
+                    ItemsSource="{Binding ListaEmprestador}"
+                    SelectedIndex="{Binding Indice}" />
+            </StackLayout>
+            <Button
+                Margin="20,0,20,0"
+                BackgroundColor="{StaticResource PrimaryColor}"
+                Command="{Binding AdicionarDevolverEmprestimoCommand}"
+                CornerRadius="5"
+                FontFamily="{StaticResource BoldWorkSans}"
+                HorizontalOptions="FillAndExpand"
+                Text="Confirmar"
+                TextColor="White" />
+
 
         </StackLayout>
 
